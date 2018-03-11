@@ -9,7 +9,7 @@
         <div id="block_page">
             <header>
                 <a href="index.php"><h1 id="titreBlog">Mon Blog</h1></a>
-                <a class="btn" href="http://localhost/coursphp/tuto_blog/index.php?action=billet&id=2">S'identifier</a>
+                <a class="btn" href="<?= "index.php?action=connexion" ?>">S'identifier</a>
                 <p>Je vous souhaite la bienvenue sur ce blog.</p>
             </header>
             <div id="contenu">
