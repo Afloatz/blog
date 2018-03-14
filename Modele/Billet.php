@@ -30,8 +30,14 @@ class Billet extends Modele {
             throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
     }
     
-    public function delete($idBillet) {
+    public function deleteBillet($idBillet) {
         $sql = 'delete from T_BILLET' . ' where BIL_ID=?';
-        $billet = $this->executerRequete($sql, array($idBillet)); 
+        $this->executerRequete($sql, array($idBillet)); 
+    }
+    
+    // Modifie un billet 
+    public function modifierBillet($idBillet) {
+        $sql = 'update T_BILLET set BIL_TITRE=?, BIL_CONTENU=?, BIL_DATE=NOW()' . ' where BIL_ID=?';
+        $this->executerRequete($sql, array($idBillet));
     }
 }
