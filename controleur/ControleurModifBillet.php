@@ -13,4 +13,9 @@ class ControleurModifBillet {
         $vue = new Vue("ModifBillet");
         $vue->generer(array('billet' => $billet));
     }
+    // Modifie le billet
+    public function modifier($titleBillet, $contenu, $idBillet) {
+        // Sauvegarde du billet modifié
+        $this->billet->modifierBillet($titleBillet, $contenu, $idBillet);
+    }
 }

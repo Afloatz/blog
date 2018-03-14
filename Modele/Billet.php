@@ -35,9 +35,9 @@ class Billet extends Modele {
         $this->executerRequete($sql, array($idBillet)); 
     }
     
-    // Modifie un billet 
-    public function modifierBillet($idBillet) {
+    // Modifie un billet dans la base
+    public function modifierBillet($titleBillet, $contenu, $idBillet) {
         $sql = 'update T_BILLET set BIL_TITRE=?, BIL_CONTENU=?, BIL_DATE=NOW()' . ' where BIL_ID=?';
-        $this->executerRequete($sql, array($idBillet));
+        $this->executerRequete($sql, array($titleBillet, $contenu, $idBillet));
     }
 }
