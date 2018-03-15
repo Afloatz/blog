@@ -4,12 +4,12 @@
     ?>
     <article>
         <header>
-            <a href="<?= "index.php?action=billet&id=" . $billet['id'] ?>">
-                <h1 class="titreBillet"><?= $billet['titre'] ?></h1>
+            <a href="<?= "index.php?action=billet&id=" . $billet->getId() ?>">
+                <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
             </a>
-            <time><?= $billet['date'] ?></time>
+            <time><?= $billet->getDate() ?></time>
         </header>
-        <p><?= $billet['contenu'] ?></p>
+        <p><?= $billet->getContenu() ?></p>
     </article>
     <hr />
 <?php endforeach; ?>
