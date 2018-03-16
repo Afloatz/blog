@@ -11,12 +11,12 @@
     ?>
     <article>
         <header>
-            <h1 class="titreBillet"><?= $billet['titre'] ?></h1>
-            <time><?= $billet['date'] ?></time>
+            <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
+            <time><?= $billet->getDate() ?></time>
         </header>
-        <p><?= $billet['contenu'] ?></p>
-        <a class="btn" href="<?= "index.php?action=suppression&id=" . $billet['id'] ?>">Supprimer</a>
-        <a class="btn" href="<?= "index.php?action=modification&id=" . $billet['id'] ?>">Modifier</a>
+        <p><?= $billet->getContenu() ?></p>
+        <a class="btn" href="<?= "index.php?action=suppression&id=" . $billet->getId() ?>">Supprimer</a>
+        <a class="btn" href="<?= "index.php?action=modification&id=" . $billet->getId() ?>">Modifier</a>
     </article>
     <hr />
 <?php endforeach; ?>

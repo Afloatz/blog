@@ -32,7 +32,6 @@ class Routeur {
                     $vue->generer(array());
                 }
                 else if ($_GET['action'] == 'deconnexion') {
-                    session_start();
                     // Détruit toutes les variables de session
                     $_SESSION = array();
                     session_destroy();
@@ -45,7 +44,6 @@ class Routeur {
                     $this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
                 }
                 else if ($_GET['action'] == 'admin' AND isset($_POST['login']) AND $_POST['login'] == "Jean" AND isset($_POST['mot_de_passe']) AND $_POST['mot_de_passe'] == "Forteroche") {
-                    session_start();
                     $_SESSION['mot_de_passe'] = 'Forteroche';
                     $this->ctrlAdmin->admin();
                 }

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurelienantonio
- * Date: 15/03/2018
- * Time: 03:20
- */
 
 class BilletEntity
 {
@@ -51,9 +45,11 @@ class BilletEntity
     public function setId($id)
     {
         $id = (int)$id;
-        if($id > 0){
+        
+        // On vérifie si le nombre est bien strictement positif
+        if ($id > 0) {
             $this->id = $id;
-        }else{
+        } else {
             throw new Exception("L'id entrée n'est pas un nombre");
         }
 
@@ -88,7 +84,11 @@ class BilletEntity
      */
     public function setTitre($titre)
     {
-        $this->titre = $titre;
+        // On vérifie qu'il s'agit bien d'un chaine de caractères
+        if (is_string($titre))
+        {
+            $this->titre = $titre;
+        }
     }
 
     /**
@@ -96,7 +96,7 @@ class BilletEntity
      */
     public function getContenu()
     {
-        return $this->contenu;
+        return htmlspecialchars($this->contenu);
     }
 
     /**
@@ -104,9 +104,9 @@ class BilletEntity
      */
     public function setContenu($contenu)
     {
-        $this->contenu = $contenu;
+        if (is_string($contenu))
+        {
+           $this->contenu = $contenu; 
+        }
     }
-
-
-
 }

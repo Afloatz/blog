@@ -32,8 +32,10 @@ class Billet extends Modele {
                 . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
                 . ' where BIL_ID=?';
         $billet = $this->executerRequete($sql, array($idBillet));
-        if ($billet->rowCount() > 0)
-            return $billet->fetch();  // Accès à la première ligne de résultat
+        if ($billet->rowCount() > 0) {
+            $billetObjet = $billet->fetch(); // Accès à la première ligne de résultat
+            return new BilletEntity($billetObjet);  
+        }
         else
             throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
     }
