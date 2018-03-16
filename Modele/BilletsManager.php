@@ -1,6 +1,6 @@
 <?php
 require_once 'Modele/Modele.php';
-require_once 'Entites/Billet.php';
+require_once 'Entites/BilletEntity.php';
 
 class BilletsManager extends Modele {
     /** Renvoie la liste des billets du blog
