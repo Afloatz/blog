@@ -2,7 +2,7 @@
 require_once 'Modele/Modele.php';
 require_once 'Entites/Billet.php';
 
-class Billet extends Modele {
+class BilletsManager extends Modele {
     /** Renvoie la liste des billets du blog
      * 
      * @return PDOStatement La liste des billets

@@ -21,6 +21,6 @@
            required /><br />
     <textarea id="txtCommentaire" name="contenu" rows="4" 
               placeholder="Votre commentaire" required></textarea><br />
-    <input type="hidden" name="id" value="<?= $billet['id'] ?>" />
+    <input type="hidden" name="id" value="<?= $billet->getId() ?>" />
     <input type="submit" value="Commenter" />
 </form>

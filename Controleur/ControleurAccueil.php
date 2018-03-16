@@ -1,14 +1,14 @@
 <?php
-require_once 'Modele/Billet.php';
+require_once 'Modele/BilletsManager.php';
 require_once 'Vue/Vue.php';
 class ControleurAccueil {
-    private $billet;
+    private $managerb;
     public function __construct() {
-        $this->billet = new Billet();
+        $this->managerb = new BilletsManager();
     }
 // Affiche la liste de tous les billets du blog
     public function accueil() {
-        $billets = $this->billet->getBillets();
+        $billets = $this->managerb->getBillets();
         $vue = new Vue("Accueil");
         $vue->generer(array('billets' => $billets));
     }

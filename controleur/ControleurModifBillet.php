@@ -1,21 +1,21 @@
 <?php
-require_once 'Modele/Billet.php';
+require_once 'Modele/BilletsManager.php';
 require_once 'Vue/Vue.php';
 
 class ControleurModifBillet {
-    private $billet;
+    private $managerb;
     public function __construct() {
-        $this->billet = new Billet();
+        $this->managerb = new BilletsManager();
     }
     // Affiche le billet à modifier
     public function modifbillet($idBillet) {
-        $billet = $this->billet->getBillet($idBillet);
+        $billet = $this->managerb->getBillet($idBillet);
         $vue = new Vue("ModifBillet");
         $vue->generer(array('billet' => $billet));
     }
     // Modifie le billet
     public function modifier($titleBillet, $contenu, $idBillet) {
         // Sauvegarde du billet modifié
-        $this->billet->modifierBillet($titleBillet, $contenu, $idBillet);
+        $this->managerb->modifierBillet($titleBillet, $contenu, $idBillet);
     }
 }
