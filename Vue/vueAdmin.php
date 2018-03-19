@@ -5,7 +5,7 @@
         <h1 >Page d'administration</h1>
 </header>
 
-<!--Reprendre comme exemple la page d'accueil et permetre l'ajout de billets comme pour les commentaires-->
+<a class="btn" href="<?= "index.php?action=ajout" ?>">Ajouter un article</a>
 
 <?php foreach ($billets as $billet):
     ?>
@@ -20,3 +20,4 @@
     </article>
     <hr />
 <?php endforeach; ?>
+

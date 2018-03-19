@@ -1,5 +1,6 @@
 <?php
 require_once 'Modele/Modele.php';
+require_once 'Entites/CommentEntity.php';
 
 class CommentsManager extends Modele {
 // Renvoie la liste des commentaires associés à un billet
@@ -8,12 +9,21 @@ class CommentsManager extends Modele {
                 . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
                 . ' where BIL_ID=?';
         $commentaires = $this->executerRequete($sql, array($idBillet));
-        return $commentaires;
+        $commentsObjet = array();
+        foreach ($commentaires as $commentaire) {
+            $objet = new CommentEntity($commentaire);
+            array_push($commentsObjet, $objet);
+        }
+        return $commentsObjet;
     }
     // Ajoute un commentaire dans la base
-    public function ajouterCommentaire($auteur, $contenu, $idBillet) {
+    public function ajouterCommentaire(CommentEntity $comment) {
         $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, BIL_ID)'
             . ' values(NOW(), ?, ?, ?)';
-        $this->executerRequete($sql, array($auteur, $contenu, $idBillet));
+        $this->executerRequete($sql, array(
+            $comment->getAuteur(),
+            $comment->getContenu(),
+            $comment->getBilletID()
+            ));
     }
 }

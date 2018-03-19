@@ -54,4 +54,14 @@ class BilletsManager extends Modele {
             $billet->getId()
         ));
     }
+    
+    // Ajoute un nouveau billet dans la base
+    public function ajouterBillet(BilletEntity $billet) {
+        $sql = 'insert into T_BILLET(BIL_DATE, BIL_TITRE, BIL_CONTENU)'
+            . ' values(NOW(), ?, ?)';
+        $this->executerRequete($sql, array(
+            $billet->getTitre(),
+            $comment->getContenu()
+            ));
+    }
 }

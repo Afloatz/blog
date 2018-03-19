@@ -12,8 +12,8 @@
     <h1 id="titreReponses">Réponses à <?= $billet->getTitre() ?></h1>
 </header>
 <?php foreach ($commentaires as $commentaire): ?>
-    <p><?= $commentaire['auteur'] ?> dit :</p>
-    <p><?= $commentaire['contenu'] ?></p>
+    <p><?= $commentaire->getAuteur() ?> dit :</p>
+    <p><?= $commentaire->getContenu() ?></p>
 <?php endforeach; ?>
 <hr />
 <form method="post" action="index.php?action=commenter">

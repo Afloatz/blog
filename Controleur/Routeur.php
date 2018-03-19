@@ -38,10 +38,11 @@ class Routeur {
                     $this->ctrlAccueil->accueil();
                 }
                 else if ($_GET['action'] == 'commenter') {
-                    $auteur = $this->getParametre($_POST, 'auteur');
-                    $contenu = $this->getParametre($_POST, 'contenu');
-                    $idBillet = $this->getParametre($_POST, 'id');
-                    $this->ctrlBillet->commenter($auteur, $contenu, $idBillet);
+                    $newComment = new CommentEntity();
+                    $newComment->setAuteur($_POST['auteur']);
+                    $newComment->setContenu($_POST['contenu']);
+                    $newComment->setBilletId($_POST['id']);
+                    $this->ctrlBillet->commenter($newComment);
                 }
                 else if ($_GET['action'] == 'admin' AND isset($_POST['login']) AND $_POST['login'] == "Jean" AND isset($_POST['mot_de_passe']) AND $_POST['mot_de_passe'] == "Forteroche") {
                     $_SESSION['mot_de_passe'] = 'Forteroche';
@@ -51,6 +52,16 @@ class Routeur {
                     $idBillet = intval($this->getParametre($_GET, 'id'));
                     $this->ctrlAdmin->delete($idBillet);
                 }
+                else if ($_GET['action'] == 'ajout') {
+                    $vue = new Vue("AddBillet");
+                    $vue->generer(array());
+                }
+                else if ($_GET['action'] == 'enregistrer') {
+                    $newBillet = new BilletEntity();
+                    $newBillet->setTitre($_POST['titleBillet']);
+                    $newBillet->setContenu($_POST['contenu']);
+                    $this->ctrlBillet->ajouter($newBillet);
+                }                
                 else if ($_GET['action'] == 'modification') {
                     $idBillet = intval($this->getParametre($_GET, 'id'));
                     if ($idBillet != 0) {
