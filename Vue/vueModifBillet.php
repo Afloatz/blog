@@ -1,4 +1,4 @@
-<?php $this->titre = "Mon Blog - " . $billet['titre']; ?>
+<?php $this->titre = "Mon Blog - " . $billet->getTitre(); ?>
 
 <head>
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
@@ -7,12 +7,12 @@
 
 
 <header>
-    <h1 id="titreReponses">Modifier le billet: <?= $billet['titre'] ?></h1>
+    <h1 id="titreReponses">Modifier le billet: <?= $billet->getTitre() ?></h1>
 </header>
 <hr />
 <form method="post" action="index.php?action=modifier">
-    <input id="titleBillet" name="titleBillet" type="text" value="<?= $billet['titre'] ?>" /><br />
-    <textarea id="txtBillet" name="contenu"><?= $billet['contenu'] ?></textarea><br />
-    <input type="hidden" name="id" value="<?= $billet['id'] ?>" />
+    <input id="titleBillet" name="titleBillet" type="text" value="<?= $billet->getTitre() ?>" /><br />
+    <textarea id="txtBillet" name="contenu"><?= $billet->getContenu() ?></textarea><br />
+    <input type="hidden" name="id" value="<?= $billet->getId() ?>" />
     <input type="submit" value="Sauvegarder" />
 </form>
