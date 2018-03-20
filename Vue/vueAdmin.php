@@ -7,8 +7,7 @@
 
 <a class="btn" href="<?= "index.php?action=ajout" ?>">Ajouter un article</a>
 
-<?php foreach ($billets as $billet):
-    ?>
+<?php foreach ($billets as $billet): ?>
     <article>
         <header>
             <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
@@ -21,3 +20,14 @@
     <hr />
 <?php endforeach; ?>
 
+<h2>Modération des commentaires</h2>
+
+<?php foreach ($commentaires as $commentaire): ?>
+    <article>
+        <p><?= $commentaire->getAuteur() ?> dit :</p>
+        <p><?= $commentaire->getContenu() ?></p>
+        <a class="btn" href="<?= "index.php?action=suppressionCom&id=" . $commentaire->getId() ?>">Supprimer</a>
+        <a class="btn" href="<?= "index.php?action=modificationCom&id=" . $commentaire->getId() ?>">Modifier</a>
+    </article>
+    <hr />
+<?php endforeach; ?>
