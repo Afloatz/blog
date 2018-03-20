@@ -3,17 +3,20 @@ require_once 'Controleur/ControleurAccueil.php';
 require_once 'Controleur/ControleurBillet.php';
 require_once 'Controleur/ControleurAdmin.php';
 require_once 'Controleur/ControleurModifBillet.php';
+require_once 'Controleur/ControleurModifComment.php';
 require_once 'Vue/Vue.php';
 class Routeur {
     private $ctrlAccueil;
     private $ctrlBillet;
     private $ctrlAdmin;
     private $ctrlModifBillet;
+    private $ctrlModifComment;
     public function __construct() {
         $this->ctrlAccueil = new ControleurAccueil();
         $this->ctrlBillet = new ControleurBillet();
         $this->ctrlAdmin = new ControleurAdmin();
         $this->ctrlModifBillet = new ControleurModifBillet();
+        $this->ctrlModifComment = new ControleurModifComment();
     }
     // Route une requête entrante : exécution l'action associée
     public function routerRequete() {
@@ -52,6 +55,10 @@ class Routeur {
                     $idBillet = intval($this->getParametre($_GET, 'id'));
                     $this->ctrlAdmin->delete($idBillet);
                 }
+                else if ($_GET['action'] == 'suppressionCom') {
+                    $idComment = intval($this->getParametre($_GET, 'id'));
+                    $this->ctrlAdmin->deleteComment($idComment);
+                }                
                 else if ($_GET['action'] == 'ajout') {
                     $vue = new Vue("AddBillet");
                     $vue->generer(array());
@@ -70,6 +77,14 @@ class Routeur {
                     else
                         throw new Exception("Identifiant de billet non valide");  
                 }
+                else if ($_GET['action'] == 'modificationCom') {
+                    $idComment = intval($this->getParametre($_GET, 'id'));
+                    if ($idComment != 0) {
+                        $this->ctrlModifComment->modifcomment($idComment);
+                    }
+                    else
+                        throw new Exception("Identifiant de billet non valide");  
+                }                
                 else if ($_GET['action'] == 'modifier') {
                     $titleBillet = $this->getParametre($_POST, 'titleBillet');
                     $contenu = $this->getParametre($_POST, 'contenu');

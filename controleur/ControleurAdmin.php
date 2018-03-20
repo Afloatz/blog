@@ -10,6 +10,7 @@ class ControleurAdmin {
         $this->managerb = new BilletsManager();
         $this->managerc = new CommentsManager();
     }
+    
     // Affiche la liste de tous les billets et commentaires du blog
     public function admin() {
         $billets = $this->managerb->getBillets();
@@ -17,9 +18,17 @@ class ControleurAdmin {
         $vue = new Vue("Admin");
         $vue->generer(array('billets' => $billets, 'commentaires' => $commentaires));
     }
+    
     // Supprime un billet
     public function delete($idBillet) {
         $this->managerb->deleteBillet($idBillet); 
+        // Actualisation de l'affichage
+        $this->admin();
+    }
+    
+    // Supprime un commentaire
+    public function deleteComment($idComment) {
+        $this->managerc->deleteComment($idComment); 
         // Actualisation de l'affichage
         $this->admin();
     }

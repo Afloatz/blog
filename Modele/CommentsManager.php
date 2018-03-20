@@ -16,8 +16,7 @@ class CommentsManager extends Modele {
         }
         return $commentairesObjet;
     }
-    
-    
+     
     // Renvoie la liste des commentaires associés à un billet
     public function getCommentaires($idBillet) {
         $sql = 'select COM_ID as id, COM_DATE as date,'
@@ -31,6 +30,21 @@ class CommentsManager extends Modele {
         }
         return $commentsObjet;
     }
+    
+    // Renvoie un commentaire spécifique
+    public function getComment($idComment) {
+        $sql = 'select COM_ID as id, COM_DATE as date,'
+                . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
+                . ' where COM_ID=?';
+        $commentaire = $this->executerRequete($sql, array($idComment));
+        if ($commentaire->rowCount() > 0) {
+            $commentaireObjet = $commentaire->fetch(); // Accès à la première ligne de résultat
+            return new CommentEntity($commentaireObjet);  
+        }
+        else
+            throw new Exception("Aucun commentaire ne correspond à l'identifiant '$idComment'");
+    }
+    
     // Ajoute un commentaire dans la base
     public function ajouterCommentaire(CommentEntity $comment) {
         $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, BIL_ID)'
@@ -41,4 +55,11 @@ class CommentsManager extends Modele {
             $comment->getBilletID()
             ));
     }
+    
+    // Supprime un commentaire
+    public function deleteComment($idComment) {
+        $sql = 'delete from T_COMMENTAIRE' . ' where COM_ID=?';
+        $this->executerRequete($sql, array($idComment));
+    }
+    
 }
