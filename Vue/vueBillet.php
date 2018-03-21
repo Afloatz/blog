@@ -1,19 +1,20 @@
 <?php $this->titre = "Mon Blog - " . $billet->getTitre(); ?>
 
 <article>
-    <header>
+    <div>
         <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
         <time><?= $billet->getDate() ?></time>
-    </header>
+    </div>
     <p><?= $billet->getContenu() ?></p>
 </article>
 <hr />
-<header>
-    <h1 id="titreReponses">Réponses à <?= $billet->getTitre() ?></h1>
-</header>
+
+<h3 id="titreReponses">Laisser un commentaire:</h3>
+
 <?php foreach ($commentaires as $commentaire): ?>
     <p><?= $commentaire->getAuteur() ?> dit :</p>
     <p><?= $commentaire->getContenu() ?></p>
+    <a class="btn" href="<?= "index.php?action=signaler&idcomment=" . $commentaire->getId() . "&idbillet=" . $commentaire->getBilletId() ?>">Signaler</a>
 <?php endforeach; ?>
 <hr />
 <form method="post" action="index.php?action=commenter">

@@ -1,15 +1,15 @@
-<?php $this->titre = "Mon Blog"; ?>
+<?php $this->titre = "Billet simple pour l'Alaska"; ?>
 
-<?php foreach ($billets as $billet):
-    ?>
-    <article>
-        <header>
-            <a href="<?= "index.php?action=billet&id=" . $billet->getId() ?>">
-                <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
+<h1>Billet simple pour l'Alaska</h1>
+
+<?php foreach ($billets as $billet): ?>
+    
+        <div>
+            <a class="titreEpisode" href="<?= "index.php?action=billet&id=" . $billet->getId() ?>">
+                <h3 class="titreBillet"><?= $billet->getTitre() ?></h3>
             </a>
-            <time><?= $billet->getDate() ?></time>
-        </header>
-        <p><?= $billet->getContenu() ?></p>
-    </article>
+         
+        </div>
+  
     <hr />
 <?php endforeach; ?>

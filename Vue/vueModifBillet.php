@@ -6,9 +6,9 @@
 </head>
 
 
-<header>
-    <h1 id="titreReponses">Modifier le billet: <?= $billet->getTitre() ?></h1>
-</header>
+
+<h3 id="titreReponses">Modifier le billet: <?= $billet->getTitre() ?></h3>
+
 <hr />
 <form method="post" action="index.php?action=modifier">
     <input id="titleBillet" name="titleBillet" type="text" value="<?= $billet->getTitre() ?>" /><br />

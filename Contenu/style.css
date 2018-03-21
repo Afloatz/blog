@@ -36,13 +36,50 @@ body
     margin: auto;
 }
 
+h1
+{
+    text-align: center;
+}
+
+.titreEpisode
+{
+    text-decoration: none; 
+    color: black;
+}
+
 
 /*------------------------------------*\
     $PARTIE 1  En-tête
 \*------------------------------------*/
 
 
-/*Définition du bouton "Plus d'infos"*/
+header 
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: rgb(150,200,100); /*définition d'un fond pour le menu*/
+}
+
+/* Navigation */
+.menu ul 
+{
+    list-style-type: none; /*pour supprimer l'affichage des puces de la liste à puce*/
+    display: flex; /*met la liste à l'horizontal au lieu de la verticale*/
+}
+
+.menu li
+{
+  margin-right: 2rem; /* espacement entre mots du menu*/
+}
+
+.menu a
+{
+  color: rgb(0,0,0);
+  text-decoration: none; /*supprime la barre qui s'affiche sous un lien de navigation*/
+}
+
+/*Définition des bouton*/
 
 .btn {
     color: rgb(255,255,255); /*couleur blanche de police*/
@@ -53,6 +90,23 @@ body
     text-decoration: none; /*pour que le mot ne soit pas souligné*/
 }
 
-#titreBlog, #piedBlog {
+
+/*------------------------------------*\
+    $PARTIE 2  Autres
+\*------------------------------------*/
+
+#form_connexion 
+{
+    margin: 0 auto;
     text-align: center;
+}
+
+/*------------------------------------*\
+    $PARTIE 5  Pied de page
+\*------------------------------------*/
+
+footer
+{
+    text-align: center;
+    margin-top: 5%;
 }

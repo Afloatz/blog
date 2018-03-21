@@ -10,6 +10,7 @@ class ControleurBillet {
         $this->managerb = new BilletsManager();
         $this->managerc = new CommentsManager();
     }
+    
     // Affiche les détails sur un billet
     public function billet($idBillet) {
         $billet = $this->managerb->getBillet($idBillet);
@@ -17,6 +18,7 @@ class ControleurBillet {
         $vue = new Vue("Billet");
         $vue->generer(array('billet' => $billet, 'commentaires' => $commentaires));
     }
+    
     // Ajoute un commentaire à un billet
     public function commenter($newComment) {
         // Sauvegarde du commentaire
@@ -24,6 +26,12 @@ class ControleurBillet {
         // Actualisation de l'affichage du billet
         $this->billet($idBillet);
     }
+    
+    // Signalement d'un commentaire par un utilisateur
+    public function reportComment($idComment) {
+        $this->managerc->signalerCommentaire($idComment);    
+    }    
+    
     // Ajouter un billet
     public function ajouter($newBillet) {
         // Sauvegarde du billet

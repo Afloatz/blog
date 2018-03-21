@@ -6,9 +6,8 @@
 </head>
 
 
-<header>
-    <h1 id="titreReponses">Ajouter un nouveau billet</h1>
-</header>
+
+<h3 id="titreReponses">Ajouter un nouveau billet</h3>
 <hr />
 <form method="post" action="index.php?action=enregistrer">
     <input id="titleBillet" name="titleBillet" type="text" placeholder="Titre du billet" /><br />

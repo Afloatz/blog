@@ -7,22 +7,35 @@
     </head>
     <body>
         <div id="block_page">
-            <header>
-                <a href="index.php"><h1 id="titreBlog">Mon Blog</h1></a>
+            
+            <header> <!-- En tête de la page-->
+                <h1>Jean Forteroche</h1>
+
                 
-                <?php if(isset($_SESSION['mot_de_passe']) AND $_SESSION['mot_de_passe']): ?>
-                <a class="btn" href="<?= "index.php?action=deconnexion" ?>">Se déconnecter</a>
-                <?php else: ?>
-                <a class="btn" href="<?= "index.php?action=connexion" ?>">S'identifier</a>
-                <?php endif; ?>
-                <p>Je vous souhaite la bienvenue sur ce blog.</p>
+                <nav class="menu"> <!--Menu de navigation-->
+                	<ul>
+                   	    <li><a href="index.php">Accueil</a></li> 
+                        <?php if(isset($_SESSION['auth']) AND $_SESSION['auth']): ?>
+                        <li><a href="<?= "index.php?action=admin" ?>">Administration</a></li>
+                    	<li><a href="<?= "index.php?action=deconnexion" ?>">Se déconnecter</a></li>
+                        <?php else: ?>
+                    	<li><a href="<?= "index.php?action=connexion" ?>">S'identifier</a></li>
+                    	<?php endif; ?>
+               		</ul>
+                </nav>
+                
+                
+
             </header>
+            
             <div id="contenu">
                 <?= $contenu ?>
-            </div> <!-- #contenu -->
+            </div> 
+            
             <footer id="piedBlog">
-                Blog réalisé avec PHP, HTML5 et CSS.
+                Blog réalisé dans le cadre d'un projet école avec PHP, HTML5 et CSS.
             </footer>
-        </div> <!-- #global -->
+            
+        </div> 
     </body>
 </html>

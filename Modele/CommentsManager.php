@@ -56,9 +56,25 @@ class CommentsManager extends Modele {
             ));
     }
     
-    // Supprime un commentaire
+    // Supprime un commentaire de la base
     public function deleteComment($idComment) {
         $sql = 'delete from T_COMMENTAIRE' . ' where COM_ID=?';
+        $this->executerRequete($sql, array($idComment));
+    }
+    
+    // Modifie un commentaire dans la base
+    public function modifierCommentaire(CommentEntity $commentaire) {
+        $sql = 'update T_COMMENTAIRE set COM_AUTEUR=?, COM_CONTENU=?, COM_DATE=NOW()' . ' where COM_ID=?';
+        $this->executerRequete($sql, array(
+            $commentaire->getAuteur(),
+            $commentaire->getContenu(),
+            $commentaire->getId()
+        ));
+    }
+    
+    // Signale un commentaire dans la base
+    public function signalerCommentaire($idComment) {
+        $sql = 'update T_COMMENTAIRE set COM_SIGNALE=1' . ' where COM_ID=?';
         $this->executerRequete($sql, array($idComment));
     }
     

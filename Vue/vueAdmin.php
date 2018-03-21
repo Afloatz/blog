@@ -1,18 +1,18 @@
 <?php $this->titre = "Page d'administration'"; ?>
 
 
-<header>
-        <h1 >Page d'administration</h1>
-</header>
 
-<a class="btn" href="<?= "index.php?action=ajout" ?>">Ajouter un article</a>
+<h1 >Administration du blog</h1>
+
+
+<a class="btn" href="<?= "index.php?action=ajout" ?>">Ajouter un billet</a>
 
 <?php foreach ($billets as $billet): ?>
     <article>
-        <header>
-            <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
+        <div>
+            <h3 class="titreBillet"><?= $billet->getTitre() ?></h3>
             <time><?= $billet->getDate() ?></time>
-        </header>
+        </div>
         <p><?= $billet->getContenu() ?></p>
         <a class="btn" href="<?= "index.php?action=suppression&id=" . $billet->getId() ?>">Supprimer</a>
         <a class="btn" href="<?= "index.php?action=modification&id=" . $billet->getId() ?>">Modifier</a>

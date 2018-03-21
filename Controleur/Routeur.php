@@ -3,7 +3,7 @@ require_once 'Controleur/ControleurAccueil.php';
 require_once 'Controleur/ControleurBillet.php';
 require_once 'Controleur/ControleurAdmin.php';
 require_once 'Controleur/ControleurModifBillet.php';
-require_once 'Controleur/ControleurModifComment.php';
+require_once 'Controleur/ControleurModifComment.php';;
 require_once 'Vue/Vue.php';
 class Routeur {
     private $ctrlAccueil;
@@ -47,10 +47,21 @@ class Routeur {
                     $newComment->setBilletId($_POST['id']);
                     $this->ctrlBillet->commenter($newComment);
                 }
-                else if ($_GET['action'] == 'admin' AND isset($_POST['login']) AND $_POST['login'] == "Jean" AND isset($_POST['mot_de_passe']) AND $_POST['mot_de_passe'] == "Forteroche") {
-                    $_SESSION['mot_de_passe'] = 'Forteroche';
-                    $this->ctrlAdmin->admin();
+                else if ($_GET['action'] == 'signaler') {
+                    $idComment = intval($this->getParametre($_GET, 'idcomment'));
+                    $idBillet = intval($this->getParametre($_GET, 'idbillet'));
+                    $this->ctrlBillet->reportComment($idComment);
+                    $this->ctrlBillet->billet($idBillet);
+                }                  
+                else if ($_GET['action'] == 'admin' AND isset($_POST['identifiant']) AND isset($_POST['mot_de_passe'])) {
+                    $username = $_POST['identifiant'];
+                    $password = $_POST['mot_de_passe'];
+                    $this->ctrlAdmin->admin($username, $password);
                 }
+                // Pour revenir à la page admin qd on est déjà connecté
+                //else if ($_GET['action'] == 'admin') {
+                 //   $this->ctrlAdmin->admin();
+               // }                
                 else if ($_GET['action'] == 'suppression') {
                     $idBillet = intval($this->getParametre($_GET, 'id'));
                     $this->ctrlAdmin->delete($idBillet);
@@ -93,6 +104,14 @@ class Routeur {
                     // Actualisation de l'affichage -> retour à la page admin
                     $this->ctrlAdmin->admin();
                 }
+                else if ($_GET['action'] == 'modifierCom') {
+                    $author = $this->getParametre($_POST, 'author');
+                    $contenu = $this->getParametre($_POST, 'contenu');
+                    $idComment = $this->getParametre($_POST, 'id');
+                    $this->ctrlModifComment->modifiercom($author, $contenu, $idComment);
+                    // Actualisation de l'affichage -> retour à la page admin
+                    $this->ctrlAdmin->admin();
+                }                
                 else
                     throw new Exception("Action non valide");
             }

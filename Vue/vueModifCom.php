@@ -6,11 +6,10 @@
 </head>
 
 
-<header>
-    <h1 id="titreReponses">Modifier le commentaire de: <?= $commentaire->getAuteur() ?></h1>
-</header>
+<h3 id="titreReponses">Modifier le commentaire de: <?= $commentaire->getAuteur() ?></h3>
+
 <hr />
-<form method="post" action="index.php?action=modifier">
+<form method="post" action="index.php?action=modifierCom">
     <input id="author" name="author" type="text" value="<?= $commentaire->getAuteur() ?>" /><br />
     <textarea id="contenu" name="contenu"><?= $commentaire->getContenu() ?></textarea><br />
     <input type="hidden" name="id" value="<?= $commentaire->getId() ?>" />
