@@ -101,8 +101,6 @@ class Routeur {
                     $contenu = $this->getParametre($_POST, 'contenu');
                     $idBillet = $this->getParametre($_POST, 'id');
                     $this->ctrlModifBillet->modifier($titleBillet, $contenu, $idBillet);
-                    // Actualisation de l'affichage -> retour à la page admin
-                    $this->ctrlAdmin->admin();
                 }
                 else if ($_GET['action'] == 'modifierCom') {
                     $author = $this->getParametre($_POST, 'author');

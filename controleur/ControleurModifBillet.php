@@ -1,5 +1,6 @@
 <?php
 require_once 'Modele/BilletsManager.php';
+require_once 'Entites/BilletEntity.php';
 require_once 'Vue/Vue.php';
 
 class ControleurModifBillet {
@@ -15,7 +16,8 @@ class ControleurModifBillet {
     }
     // Modifie le billet
     public function modifier($titleBillet, $contenu, $idBillet) {
+        $billet = new BilletEntity(array("id"=>$idBillet, "titre"=>$titleBillet, "contenu"=>$contenu));
         // Sauvegarde du billet modifié
-        $this->managerb->modifierBillet($titleBillet, $contenu, $idBillet);
+        $this->managerb->modifierBillet($billet);
     }
 }

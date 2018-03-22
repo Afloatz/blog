@@ -2,7 +2,7 @@
 
 class CommentEntity
 {
-    private $id, $date, $auteur, $contenu, $bil_id;
+    private $id, $date, $auteur, $contenu, $post_id;
 
     /**
      * Comment constructor.
@@ -112,16 +112,16 @@ class CommentEntity
     
     public function getBilletId()
     {
-        return $this->bil_id;
+        return $this->post_id;
     }
     
-    public function setBilletId($bil_id)
+    public function setBilletId($post_id)
     {
-        $bil_id = (int)$ibil_d;
+        $post_id = (int)$post_id;
         
         // On vérifie si le nombre est bien strictement positif
-        if ($bil_id > 0) {
-            $this->bil_id = $bil_id;
+        if ($post_id > 0) {
+            $this->post_id = $post_id;
         } else {
             throw new Exception("L'id entrée n'est pas un nombre");
         }

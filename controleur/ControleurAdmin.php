@@ -16,14 +16,14 @@ class ControleurAdmin {
     
     // Affiche la liste de tous les billets et commentaires du blog
     public function admin($username, $password) {
-        $this->managers->login($username, $password);
+        $user = $this->managers->login($username, $password);
         
-        if (password_verify($_POST['mot_de_passe'], $user->password)) {
-            $_SESSION['auth'] = $user;
+        if ($user != null) {
+           $_SESSION['auth'] = $user;
             $billets = $this->managerb->getBillets();
             $commentaires = $this->managerc->getListCommentaires();
             $vue = new Vue("Admin");
-            $vue->generer(array('billets' => $billets, 'commentaires' => $commentaires));            
+            $vue->generer(array('billets' => $billets, 'commentaires' => $commentaires));          
         } else {
             $vue = new Vue("Connexion");
             $vue->generer(array());

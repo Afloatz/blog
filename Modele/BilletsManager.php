@@ -8,9 +8,9 @@ class BilletsManager extends Modele {
      * @return PDOStatement La liste des billets
      */
     public function getBillets() {
-        $sql = 'select BIL_ID as id, BIL_DATE as date,'
-                . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
-                . ' order by BIL_ID desc';
+        $sql = 'SELECT post_id AS id, post_date AS date,'
+                . ' post_title AS titre, post_content AS contenu FROM posts'
+                . ' ORDER BY post_id DESC';
         $billets = $this->executerRequete($sql);
         $billetsObjet = array();
         foreach ($billets as $billet){
@@ -28,9 +28,9 @@ class BilletsManager extends Modele {
      * @throws Exception Si l'identifiant du billet est inconnu
      */
     public function getBillet($idBillet) {
-        $sql = 'select BIL_ID as id, BIL_DATE as date,'
-                . ' BIL_TITRE as titre, BIL_CONTENU as contenu from T_BILLET'
-                . ' where BIL_ID=?';
+        $sql = 'select post_id as id, post_date as date,'
+                . ' post_title as titre, post_content as contenu from posts'
+                . ' where post_id=?';
         $billet = $this->executerRequete($sql, array($idBillet));
         if ($billet->rowCount() > 0) {
             $billetObjet = $billet->fetch(); // Accès à la première ligne de résultat
@@ -41,13 +41,13 @@ class BilletsManager extends Modele {
     }
     
     public function deleteBillet($idBillet) {
-        $sql = 'delete from T_BILLET' . ' where BIL_ID=?';
+        $sql = 'delete from posts' . ' where post_id=?';
         $this->executerRequete($sql, array($idBillet)); 
     }
     
     // Modifie un billet dans la base
     public function modifierBillet(BilletEntity $billet) {
-        $sql = 'update T_BILLET set BIL_TITRE=?, BIL_CONTENU=?, BIL_DATE=NOW()' . ' where BIL_ID=?';
+        $sql = 'update posts set post_title=?, post_content=?, post_date=NOW()' . ' where post_id=?';
         $this->executerRequete($sql, array(
             $billet->getTitre(),
             $billet->getContenu(),
@@ -57,7 +57,7 @@ class BilletsManager extends Modele {
     
     // Ajoute un nouveau billet dans la base
     public function ajouterBillet(BilletEntity $billet) {
-        $sql = 'insert into T_BILLET(BIL_DATE, BIL_TITRE, BIL_CONTENU)'
+        $sql = 'insert into posts(post_date, post_title, post_content)'
             . ' values(NOW(), ?, ?)';
         $this->executerRequete($sql, array(
             $billet->getTitre(),

@@ -1,4 +1,4 @@
-<?php $this->titre = "Page d'administration'"; ?>
+<?php $this->titre = "Page d'administration"; ?>
 
 
 

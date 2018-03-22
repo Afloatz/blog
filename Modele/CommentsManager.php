@@ -21,7 +21,7 @@ class CommentsManager extends Modele {
     public function getCommentaires($idBillet) {
         $sql = 'select COM_ID as id, COM_DATE as date,'
                 . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
-                . ' where BIL_ID=?';
+                . ' where post_id=?';
         $commentaires = $this->executerRequete($sql, array($idBillet));
         $commentsObjet = array();
         foreach ($commentaires as $commentaire) {
@@ -47,7 +47,7 @@ class CommentsManager extends Modele {
     
     // Ajoute un commentaire dans la base
     public function ajouterCommentaire(CommentEntity $comment) {
-        $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, BIL_ID)'
+        $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, post_id)'
             . ' values(NOW(), ?, ?, ?)';
         $this->executerRequete($sql, array(
             $comment->getAuteur(),

@@ -7,7 +7,7 @@
  */
 abstract class Modele {
     /** Objet PDO d'accès à la BD */
-    private $bdd;
+    private $db;
     /**
      * Exécute une requête SQL éventuellement paramétrée
      * 
@@ -17,10 +17,10 @@ abstract class Modele {
      */
     protected function executerRequete($sql, $params = null) {
         if ($params == null) {
-            $resultat = $this->getBdd()->query($sql); // exécution directe
+            $resultat = $this->getDb()->query($sql); // exécution directe
         }
         else {
-            $resultat = $this->getBdd()->prepare($sql);  // requête préparée
+            $resultat = $this->getDb()->prepare($sql);  // requête préparée
             $resultat->execute($params);
         }
         return $resultat;
@@ -31,13 +31,13 @@ abstract class Modele {
      * 
      * @return PDO L'objet PDO de connexion à la BDD
      */
-    private function getBdd() {
-        if ($this->bdd == null) {
+    private function getDb() {
+        if ($this->db == null) {
             // Création de la connexion
-            $this->bdd = new PDO('mysql:host=localhost;dbname=monblog;charset=utf8',
+            $this->db = new PDO('mysql:host=localhost;dbname=blog;charset=utf8',
                     'root', '',
                     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
-        return $this->bdd;
+        return $this->db;
     }
 }
