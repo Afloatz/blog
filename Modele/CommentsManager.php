@@ -5,9 +5,9 @@ require_once 'Entites/CommentEntity.php';
 class CommentsManager extends Modele {
     // Renvoie la liste de tous les commentaires
     public function getListCommentaires() {
-        $sql = 'select COM_ID as id, COM_DATE as date,'
-                . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
-                . ' order by COM_ID desc';
+        $sql = 'select com_id as id, com_date as date,'
+                . ' com_author as auteur, com_content as contenu from comments'
+                . ' order by com_id desc';
         $commentaires = $this->executerRequete($sql);
         $commentairesObjet = array();
         foreach ($commentaires as $commentaire) {
@@ -19,8 +19,8 @@ class CommentsManager extends Modele {
      
     // Renvoie la liste des commentaires associés à un billet
     public function getCommentaires($idBillet) {
-        $sql = 'select COM_ID as id, COM_DATE as date,'
-                . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
+        $sql = 'select com_id as id, com_date as date,'
+                . ' com_author as auteur, com_content as contenu from comments'
                 . ' where post_id=?';
         $commentaires = $this->executerRequete($sql, array($idBillet));
         $commentsObjet = array();
@@ -33,9 +33,9 @@ class CommentsManager extends Modele {
     
     // Renvoie un commentaire spécifique
     public function getComment($idComment) {
-        $sql = 'select COM_ID as id, COM_DATE as date,'
-                . ' COM_AUTEUR as auteur, COM_CONTENU as contenu from T_COMMENTAIRE'
-                . ' where COM_ID=?';
+        $sql = 'select com_id as id, com_date as date,'
+                . ' com_author as auteur, com_content as contenu from comments'
+                . ' where com_id=?';
         $commentaire = $this->executerRequete($sql, array($idComment));
         if ($commentaire->rowCount() > 0) {
             $commentaireObjet = $commentaire->fetch(); // Accès à la première ligne de résultat
@@ -47,7 +47,7 @@ class CommentsManager extends Modele {
     
     // Ajoute un commentaire dans la base
     public function ajouterCommentaire(CommentEntity $comment) {
-        $sql = 'insert into T_COMMENTAIRE(COM_DATE, COM_AUTEUR, COM_CONTENU, post_id)'
+        $sql = 'insert into comments(com_date, com_author, com_content, post_id)'
             . ' values(NOW(), ?, ?, ?)';
         $this->executerRequete($sql, array(
             $comment->getAuteur(),
@@ -58,13 +58,13 @@ class CommentsManager extends Modele {
     
     // Supprime un commentaire de la base
     public function deleteComment($idComment) {
-        $sql = 'delete from T_COMMENTAIRE' . ' where COM_ID=?';
+        $sql = 'delete from comments' . ' where com_id=?';
         $this->executerRequete($sql, array($idComment));
     }
     
     // Modifie un commentaire dans la base
     public function modifierCommentaire(CommentEntity $commentaire) {
-        $sql = 'update T_COMMENTAIRE set COM_AUTEUR=?, COM_CONTENU=?, COM_DATE=NOW()' . ' where COM_ID=?';
+        $sql = 'update comments set com_author=?, com_content=?, com_date=NOW()' . ' where com_id=?';
         $this->executerRequete($sql, array(
             $commentaire->getAuteur(),
             $commentaire->getContenu(),
@@ -74,7 +74,7 @@ class CommentsManager extends Modele {
     
     // Signale un commentaire dans la base
     public function signalerCommentaire($idComment) {
-        $sql = 'update T_COMMENTAIRE set COM_SIGNALE=1' . ' where COM_ID=?';
+        $sql = 'update comments set com_report=1' . ' where com_id=?';
         $this->executerRequete($sql, array($idComment));
     }
     
