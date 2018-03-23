@@ -1,6 +1,6 @@
 <?php
 
-class BilletEntity
+class PostEntity
 {
     private $id, $date, $titre, $contenu;
 

@@ -1,5 +1,5 @@
 <?php
-class Vue {
+class View {
     // Nom du fichier associé à la vue
     private $fichier;
     
@@ -7,14 +7,14 @@ class Vue {
     private $titre;
     public function __construct($action) {
         // Détermination du nom du fichier vue à partir de l'action
-        $this->fichier = "Vue/vue" . $action . ".php";
+        $this->fichier = "View/" . $action . "View.php";
     }
     // Génère et affiche la vue
     public function generer($donnees) {
         // Génération de la partie spécifique de la vue
         $contenu = $this->genererFichier($this->fichier, $donnees);
-        // Génération du gabarit commun utilisant la partie spécifique
-        $vue = $this->genererFichier('Vue/gabarit.php',
+        // Génération du template commun utilisant la partie spécifique
+        $vue = $this->genererFichier('View/template.php',
                 array('titre' => $this->titre, 'contenu' => $contenu));
         // Renvoi de la vue au navigateur
         echo $vue;

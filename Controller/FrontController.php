@@ -1,11 +1,12 @@
 <?php
-require_once 'Controleur/ControleurAccueil.php';
-require_once 'Controleur/ControleurBillet.php';
-require_once 'Controleur/ControleurAdmin.php';
-require_once 'Controleur/ControleurModifBillet.php';
-require_once 'Controleur/ControleurModifComment.php';;
-require_once 'Vue/Vue.php';
-class Routeur {
+require_once 'Controller/ControleurAccueil.php';
+require_once 'Controller/ControleurBillet.php';
+require_once 'Controller/ControleurAdmin.php';
+require_once 'Controller/ControleurModifBillet.php';
+require_once 'Controller/ControleurModifComment.php';;
+require_once 'View/View.php';
+
+class FrontController {
     private $ctrlAccueil;
     private $ctrlBillet;
     private $ctrlAdmin;
@@ -31,8 +32,8 @@ class Routeur {
                         throw new Exception("Identifiant de billet non valide");
                 }
                 else if ($_GET['action'] == 'connexion') {
-                    $vue = new Vue("Connexion");
-                    $vue->generer(array());
+                    $view = new View("login");
+                    $view->generer(array());
                 }
                 else if ($_GET['action'] == 'deconnexion') {
                     // Détruit toutes les variables de session
@@ -71,8 +72,8 @@ class Routeur {
                     $this->ctrlAdmin->deleteComment($idComment);
                 }                
                 else if ($_GET['action'] == 'ajout') {
-                    $vue = new Vue("AddBillet");
-                    $vue->generer(array());
+                    $view = new View("addPost");
+                    $view->generer(array());
                 }
                 else if ($_GET['action'] == 'enregistrer') {
                     $newBillet = new BilletEntity();
@@ -123,8 +124,8 @@ class Routeur {
     }
     // Affiche une erreur
     private function erreur($msgErreur) {
-        $vue = new Vue("Erreur");
-        $vue->generer(array('msgErreur' => $msgErreur));
+        $view = new View("error");
+        $view->generer(array('msgErreur' => $msgErreur));
     }
     // Recherche un paramètre dans un tableau
     private function getParametre($tableau, $nom) {

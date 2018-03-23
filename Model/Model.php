@@ -5,7 +5,7 @@
  * Utilise l'API PDO
  *
  */
-abstract class Modele {
+abstract class Model {
     /** Objet PDO d'accès à la BD */
     private $db;
     /**
@@ -15,15 +15,15 @@ abstract class Modele {
      * @param array $valeurs Les valeurs associées à la requête
      * @return PDOStatement Le résultat renvoyé par la requête
      */
-    protected function executerRequete($sql, $params = null) {
+    protected function executeRequest($sql, $params = null) {
         if ($params == null) {
-            $resultat = $this->getDb()->query($sql); // exécution directe
+            $result = $this->getDb()->query($sql); // exécution directe
         }
         else {
-            $resultat = $this->getDb()->prepare($sql);  // requête préparée
-            $resultat->execute($params);
+            $result = $this->getDb()->prepare($sql);  // requête préparée
+            $result->execute($params);
         }
-        return $resultat;
+        return $result;
     }
     
     /**

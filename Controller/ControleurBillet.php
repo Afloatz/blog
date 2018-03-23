@@ -1,21 +1,21 @@
 <?php
-require_once 'Modele/BilletsManager.php';
-require_once 'Modele/CommentsManager.php';
-require_once 'Vue/Vue.php';
+require_once 'Model/PostManager.php';
+require_once 'Model/CommentManager.php';
+require_once 'View/View.php';
 
 class ControleurBillet {
     private $managerb;
     private $managerc;
     public function __construct() {
-        $this->managerb = new BilletsManager();
-        $this->managerc = new CommentsManager();
+        $this->managerb = new PostManager();
+        $this->managerc = new CommentManager();
     }
     
     // Affiche les détails sur un billet
     public function billet($idBillet) {
         $billet = $this->managerb->getBillet($idBillet);
         $commentaires = $this->managerc->getCommentaires($idBillet);
-        $vue = new Vue("Billet");
+        $vue = new View("post");
         $vue->generer(array('billet' => $billet, 'commentaires' => $commentaires));
     }
     

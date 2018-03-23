@@ -1,17 +1,17 @@
 <?php
-require_once 'Modele/BilletsManager.php';
-require_once 'Modele/CommentsManager.php';
-require_once 'Modele/SessionManager.php';
-require_once 'Vue/Vue.php';
+require_once 'Model/PostManager.php';
+require_once 'Model/CommentManager.php';
+require_once 'Model/AdminManager.php';
+require_once 'View/View.php';
 
 class ControleurAdmin {
     private $managerb;
     private $managerc;
     private $managers;
     public function __construct() {
-        $this->managerb = new BilletsManager();
-        $this->managerc = new CommentsManager();
-        $this->managers = new SessionManager();
+        $this->managerb = new PostManager();
+        $this->managerc = new CommentManager();
+        $this->managers = new AdminManager();
     }
     
     // Affiche la liste de tous les billets et commentaires du blog
@@ -22,10 +22,10 @@ class ControleurAdmin {
            $_SESSION['auth'] = $user;
             $billets = $this->managerb->getBillets();
             $commentaires = $this->managerc->getListCommentaires();
-            $vue = new Vue("Admin");
+            $vue = new View("admin");
             $vue->generer(array('billets' => $billets, 'commentaires' => $commentaires));          
         } else {
-            $vue = new Vue("Connexion");
+            $vue = new View("login");
             $vue->generer(array());
         }       
     }

@@ -1,8 +1,8 @@
 <?php
-require_once 'Modele/Modele.php';
-require_once 'Entites/BilletEntity.php';
+require_once 'Model/Model.php';
+require_once 'Entity/PostEntity.php';
 
-class BilletsManager extends Modele {
+class PostManager extends Model {
     /** Renvoie la liste des billets du blog
      * 
      * @return PDOStatement La liste des billets
@@ -11,10 +11,10 @@ class BilletsManager extends Modele {
         $sql = 'SELECT post_id AS id, post_date AS date,'
                 . ' post_title AS titre, post_content AS contenu FROM posts'
                 . ' ORDER BY post_id DESC';
-        $billets = $this->executerRequete($sql);
+        $billets = $this->executeRequest($sql);
         $billetsObjet = array();
         foreach ($billets as $billet){
-            $objet = new BilletEntity($billet);
+            $objet = new PostEntity($billet);
             array_push($billetsObjet, $objet);
 
         }
@@ -31,10 +31,10 @@ class BilletsManager extends Modele {
         $sql = 'select post_id as id, post_date as date,'
                 . ' post_title as titre, post_content as contenu from posts'
                 . ' where post_id=?';
-        $billet = $this->executerRequete($sql, array($idBillet));
+        $billet = $this->executeRequest($sql, array($idBillet));
         if ($billet->rowCount() > 0) {
             $billetObjet = $billet->fetch(); // Accès à la première ligne de résultat
-            return new BilletEntity($billetObjet);  
+            return new PostEntity($billetObjet);  
         }
         else
             throw new Exception("Aucun billet ne correspond à l'identifiant '$idBillet'");
@@ -42,13 +42,13 @@ class BilletsManager extends Modele {
     
     public function deleteBillet($idBillet) {
         $sql = 'delete from posts' . ' where post_id=?';
-        $this->executerRequete($sql, array($idBillet)); 
+        $this->executeRequest($sql, array($idBillet)); 
     }
     
     // Modifie un billet dans la base
-    public function modifierBillet(BilletEntity $billet) {
+    public function modifierBillet(PostEntity $billet) {
         $sql = 'update posts set post_title=?, post_content=?, post_date=NOW()' . ' where post_id=?';
-        $this->executerRequete($sql, array(
+        $this->executeRequest($sql, array(
             $billet->getTitre(),
             $billet->getContenu(),
             $billet->getId()
@@ -56,10 +56,10 @@ class BilletsManager extends Modele {
     }
     
     // Ajoute un nouveau billet dans la base
-    public function ajouterBillet(BilletEntity $billet) {
+    public function ajouterBillet(PostEntity $billet) {
         $sql = 'insert into posts(post_date, post_title, post_content)'
             . ' values(NOW(), ?, ?)';
-        $this->executerRequete($sql, array(
+        $this->executeRequest($sql, array(
             $billet->getTitre(),
             $comment->getContenu()
             ));
