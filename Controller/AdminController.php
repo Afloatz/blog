@@ -1,10 +1,11 @@
 <?php
+require_once 'Entity/PostEntity.php';
 require_once 'Model/PostManager.php';
 require_once 'Model/CommentManager.php';
 require_once 'Model/AdminManager.php';
 require_once 'View/View.php';
 
-class ControleurAdmin {
+class AdminController {
     private $managerb;
     private $managerc;
     private $managers;
@@ -49,5 +50,31 @@ class ControleurAdmin {
         if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['auth'] = $user;
         }
+    }
+    
+        // Affiche le billet à modifier
+    public function modifbillet($idBillet) {
+        $billet = $this->managerb->getBillet($idBillet);
+        $vue = new View("updatePost");
+        $vue->generer(array('billet' => $billet));
+    }
+    // Modifie le billet
+    public function modifier($titleBillet, $contenu, $idBillet) {
+        $billet = new PostEntity(array("id"=>$idBillet, "titre"=>$titleBillet, "contenu"=>$contenu));
+        // Sauvegarde du billet modifié
+        $this->managerb->modifierBillet($billet);
+    }
+    
+        // Affiche le commentaire à modifier
+    public function modifcomment($idComment) {
+        $commentaire = $this->managerc->getComment($idComment);
+        $vue = new View("updateCom");
+        $vue->generer(array('commentaire' => $commentaire));
+    }
+    
+    // Modifie le commentaire
+    public function modifiercom($author, $contenu, $idComment) {
+        // Sauvegarde du commentaire modifié
+        $this->managerc->modifierCommentaire($author, $contenu, $idComment);
     }
 }

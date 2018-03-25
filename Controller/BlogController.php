@@ -3,15 +3,21 @@ require_once 'Model/PostManager.php';
 require_once 'Model/CommentManager.php';
 require_once 'View/View.php';
 
-class ControleurBillet {
+class BlogController {
     private $managerb;
     private $managerc;
     public function __construct() {
         $this->managerb = new PostManager();
         $this->managerc = new CommentManager();
     }
+// Affiche la liste de tous les billets du blog
+    public function accueil() {
+        $billets = $this->managerb->getBillets();
+        $vue = new View("home");
+        $vue->generer(array('billets' => $billets));
+    }
     
-    // Affiche les détails sur un billet
+        // Affiche les détails sur un billet
     public function billet($idBillet) {
         $billet = $this->managerb->getBillet($idBillet);
         $commentaires = $this->managerc->getCommentaires($idBillet);
@@ -19,7 +25,7 @@ class ControleurBillet {
         $vue->generer(array('billet' => $billet, 'commentaires' => $commentaires));
     }
     
-    // Ajoute un commentaire à un billet
+        // Ajoute un commentaire à un billet
     public function commenter($newComment) {
         // Sauvegarde du commentaire
         $this->managerc->ajouterCommentaire($newComment);
@@ -30,11 +36,6 @@ class ControleurBillet {
     // Signalement d'un commentaire par un utilisateur
     public function reportComment($idComment) {
         $this->managerc->signalerCommentaire($idComment);    
-    }    
+    }   
     
-    // Ajouter un billet
-    public function ajouter($newBillet) {
-        // Sauvegarde du billet
-        $this->managerb->ajouterBillet($newBillet);
-    }
 }
