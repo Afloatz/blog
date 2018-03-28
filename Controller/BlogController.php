@@ -1,41 +1,44 @@
 <?php
+require_once 'Entity/CommentEntity.php';
 require_once 'Model/PostManager.php';
 require_once 'Model/CommentManager.php';
 require_once 'View/View.php';
 
 class BlogController {
-    private $managerb;
-    private $managerc;
+    private $postManager;
+    private $commentManager;
     public function __construct() {
-        $this->managerb = new PostManager();
-        $this->managerc = new CommentManager();
-    }
-// Affiche la liste de tous les billets du blog
-    public function accueil() {
-        $billets = $this->managerb->getBillets();
-        $vue = new View("home");
-        $vue->generer(array('billets' => $billets));
+        $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
     }
     
-        // Affiche les détails sur un billet
-    public function billet($idBillet) {
-        $billet = $this->managerb->getBillet($idBillet);
-        $commentaires = $this->managerc->getCommentaires($idBillet);
-        $vue = new View("post");
-        $vue->generer(array('billet' => $billet, 'commentaires' => $commentaires));
+    // Affiche la liste de tous les billets du blog
+    public function listPosts() {
+        $posts = $this->postManager->getPosts();
+        $view = new View("home");
+        $view->generer(array('posts' => $posts));
     }
     
-        // Ajoute un commentaire à un billet
-    public function commenter($newComment) {
+    // Affiche les détails sur un billet
+    public function post($postId) {
+        $post = $this->postManager->getPost($postId);
+        $comments = $this->commentManager->getComments($postId);
+        $view = new View("post");
+        $view->generer(array('post' => $post, 'comments' => $comments));
+    }
+    
+    // Ajoute un commentaire à un billet
+    public function addComment($author, $content, $postId) {
+        $comment = new CommentEntity(array('auteur' => $author, 'contenu' => $content, 'post_id' => $postId));
         // Sauvegarde du commentaire
-        $this->managerc->ajouterCommentaire($newComment);
-        // Actualisation de l'affichage du billet
-        $this->billet($idBillet);
+        $this->commentManager->postComment($comment);
+        //Comment actualiser la vue?
     }
     
     // Signalement d'un commentaire par un utilisateur
-    public function reportComment($idComment) {
-        $this->managerc->signalerCommentaire($idComment);    
+    public function reportComment($commentId) {
+        $this->commentManager->report($commentId);  
+        //Comment réactualiser la page?
     }   
     
 }

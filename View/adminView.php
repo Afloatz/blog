@@ -4,30 +4,30 @@
 
 <h1 >Administration du blog</h1>
 
+<p>
+    <a class="btn" href="<?= "index.php?action=addPost" ?>">Ajouter un billet</a>
+    <a class="btn" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
+</p>
 
-<a class="btn" href="<?= "index.php?action=ajout" ?>">Ajouter un billet</a>
+<?php if(isset($_SESSION['auth']) AND $_SESSION['auth']): ?>
+    <a class="btn" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
+<?php else: ?>
+    <a class="btn-moderate" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
+<?php endif; ?>
 
-<?php foreach ($billets as $billet): ?>
-    <article>
-        <div>
-            <h3 class="titreBillet"><?= $billet->getTitre() ?></h3>
-            <time><?= $billet->getDate() ?></time>
-        </div>
-        <p><?= $billet->getContenu() ?></p>
-        <a class="btn" href="<?= "index.php?action=suppression&id=" . $billet->getId() ?>">Supprimer</a>
-        <a class="btn" href="<?= "index.php?action=modification&id=" . $billet->getId() ?>">Modifier</a>
-    </article>
-    <hr />
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Date</th>
+    </tr>
+<?php foreach ($posts as $post): ?>
+    <tr>
+        <td><?= $post->getTitre() ?></td>
+        <td><?= $post->getDate() ?></td> 
+        <td>
+            <a class="btn" href="<?= "index.php?action=deletePost&id=" . $post->getId() ?>">Supprimer</a>
+            <a class="btn" href="<?= "index.php?action=editPost&id=" . $post->getId() ?>">Modifier</a>
+        </td>
+    </tr>
 <?php endforeach; ?>
-
-<h2>Modération des commentaires</h2>
-
-<?php foreach ($commentaires as $commentaire): ?>
-    <article>
-        <p><?= $commentaire->getAuteur() ?> dit :</p>
-        <p><?= $commentaire->getContenu() ?></p>
-        <a class="btn" href="<?= "index.php?action=suppressionCom&id=" . $commentaire->getId() ?>">Supprimer</a>
-        <a class="btn" href="<?= "index.php?action=modificationCom&id=" . $commentaire->getId() ?>">Modifier</a>
-    </article>
-    <hr />
-<?php endforeach; ?>
+</table>

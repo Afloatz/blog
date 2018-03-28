@@ -101,6 +101,25 @@ header
     text-align: center;
 }
 
+
+th, td {
+    width: 300px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+}
+
+
+td {
+    padding: 3%;
+}
+
 /*------------------------------------*\
     $PARTIE 5  Pied de page
 \*------------------------------------*/

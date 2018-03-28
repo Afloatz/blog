@@ -2,7 +2,7 @@
 
 class CommentEntity
 {
-    private $id, $date, $auteur, $contenu, $post_id;
+    private $id, $date, $auteur, $contenu, com_report, $post_id;
 
     /**
      * Comment constructor.
@@ -109,6 +109,20 @@ class CommentEntity
            $this->contenu = $contenu; 
         }
     }
+    
+    public function getComReport()
+    {
+        return $this->com_report;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setComReport($com_report)
+    {
+        $com_report = (int)$com_report;
+        $this->com_report = $com_report;
+    }    
     
     public function getBilletId()
     {

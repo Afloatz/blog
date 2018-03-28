@@ -1,27 +1,28 @@
-<?php $this->titre = "Mon Blog - " . $billet->getTitre(); ?>
+<?php $this->titre = "Mon Blog - " . $post->getTitre(); ?>
 
 <article>
     <div>
-        <h1 class="titreBillet"><?= $billet->getTitre() ?></h1>
-        <time><?= $billet->getDate() ?></time>
+        <h1 class="titreBillet"><?= $post->getTitre() ?></h1>
+        <time><?= $post->getDate() ?></time>
     </div>
-    <p><?= $billet->getContenu() ?></p>
+    <p><?= htmlspecialchars_decode($post->getContenu()) ?></p>
 </article>
 <hr />
 
-<h3 id="titreReponses">Laisser un commentaire:</h3>
+<h3 id="titreReponses">Commentaires:</h3>
 
-<?php foreach ($commentaires as $commentaire): ?>
-    <p><?= $commentaire->getAuteur() ?> dit :</p>
-    <p><?= $commentaire->getContenu() ?></p>
-    <a class="btn" href="<?= "index.php?action=signaler&idcomment=" . $commentaire->getId() . "&idbillet=" . $commentaire->getBilletId() ?>">Signaler</a>
+<?php foreach ($comments as $comment): ?>
+    <p><?= $comment->getAuteur() ?> dit :</p>
+    <p><?= $comment->getContenu() ?></p>
+    <a class="btn" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() . "&postId=" . $comment->getBilletId() ?>">Signaler</a>
 <?php endforeach; ?>
 <hr />
-<form method="post" action="index.php?action=commenter">
-    <input id="auteur" name="auteur" type="text" placeholder="Votre pseudo" 
-           required /><br />
-    <textarea id="txtCommentaire" name="contenu" rows="4" 
-              placeholder="Votre commentaire" required></textarea><br />
-    <input type="hidden" name="id" value="<?= $billet->getId() ?>" />
+
+<h3>Laisser un commentaire:</h3>
+
+<form method="post" action="index.php?action=addComment">
+    <input id="author" name="author" type="text" placeholder="Votre pseudo" required /><br />
+    <textarea id="content" name="content" rows="4" placeholder="Votre commentaire" required></textarea><br />
+    <input type="hidden" name="id" value="<?= $post->getId() ?>" />
     <input type="submit" value="Commenter" />
 </form>

@@ -9,8 +9,8 @@
 
 <h3 id="titreReponses">Ajouter un nouveau billet</h3>
 <hr />
-<form method="post" action="index.php?action=enregistrer">
-    <input id="titleBillet" name="titleBillet" type="text" placeholder="Titre du billet" /><br />
-    <textarea id="txtBillet" name="contenu"></textarea><br />
+<form method="post" action="index.php?action=saveNewPost">
+    <input id="title" name="title" type="text" placeholder="Titre du billet" /><br />
+    <textarea id="content" name="content"></textarea><br />
     <input type="submit" value="Enregister" />
 </form>

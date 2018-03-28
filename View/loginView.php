@@ -13,7 +13,7 @@
 
    
 <form id="form_connexion" method="post" action="index.php?action=admin">
-    <p><input type="text" name="identifiant" /></p>
-    <p><input type="password" name="mot_de_passe" /></p>
+    <p><input type="text" name="username" /></p>
+    <p><input type="password" name="password" /></p>
     <p><input type="submit" value="Se connecter" /></p>
 </form>

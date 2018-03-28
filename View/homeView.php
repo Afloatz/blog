@@ -2,11 +2,11 @@
 
 <h1>Billet simple pour l'Alaska</h1>
 
-<?php foreach ($billets as $billet): ?>
+<?php foreach ($posts as $post): ?>
     
         <div>
-            <a class="titreEpisode" href="<?= "index.php?action=billet&id=" . $billet->getId() ?>">
-                <h3 class="titreBillet"><?= $billet->getTitre() ?></h3>
+            <a class="titreEpisode" href="<?= "index.php?action=post&id=" . $post->getId() ?>">
+                <h3 class="titreBillet"><?= $post->getTitre() ?></h3>
             </a>
          
         </div>
