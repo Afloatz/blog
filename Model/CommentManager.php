@@ -7,7 +7,7 @@ class CommentManager extends Model {
     // Renvoie la liste de tous les commentaires
     public function getListComments() {
         $sql = 'SELECT com_id AS id, com_date AS date,'
-                . ' com_author AS auteur, com_content AS contenu FROM comments'
+                . ' com_author AS auteur, com_content AS contenu, com_report AS report, post_id AS postid FROM comments'
                 . ' ORDER BY com_id DESC';
         $comments = $this->executeRequest($sql);
         $commentsObject = array();
@@ -53,7 +53,7 @@ class CommentManager extends Model {
         $this->executeRequest($sql, array(
             $comment->getAuteur(),
             $comment->getContenu(),
-            $comment->getBilletID()
+            $comment->getPostId()
             ));
     }
     
@@ -77,6 +77,15 @@ class CommentManager extends Model {
     public function report($commentId) {
         $sql = 'UPDATE comments SET com_report=1' . ' WHERE com_id=?';
         $this->executeRequest($sql, array($commentId));
+    }
+    
+    // Calcule la somme des valeurs de la colonne com_report
+    public function getSum() {
+        $sql = 'SELECT SUM(com_report)' . ' FROM comments';
+        $req = $this->executeRequest($sql);
+        $result = $req->fetch(); // renvoie la 1ère ligne 
+        $sum = $result[0]; // Stocke le résultat dans une variable (une seule ligne)
+        return $sum;
     }
     
 }

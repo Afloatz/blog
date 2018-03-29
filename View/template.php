@@ -16,10 +16,10 @@
                 	<ul>
                    	    <li><a href="index.php">Accueil</a></li> 
                         <?php if(isset($_SESSION['auth']) AND $_SESSION['auth']): ?>
-                        <li><a href="<?= "index.php?action=admin" ?>">Administration</a></li>
-                    	<li><a href="<?= "index.php?action=logout" ?>">Se déconnecter</a></li>
+                            <li><a href="<?= "index.php?action=admin" ?>">Administration</a></li>
+                            <li><a href="<?= "index.php?action=logout" ?>">Se déconnecter</a></li>
                         <?php else: ?>
-                    	<li><a href="<?= "index.php?action=login" ?>">S'identifier</a></li>
+                    	   <li><a href="<?= "index.php?action=login" ?>">S'identifier</a></li>
                     	<?php endif; ?>
                		</ul>
                 </nav>

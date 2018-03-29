@@ -42,7 +42,6 @@ class FrontController {
                 }
                 else if ($_GET['action'] == 'reportComment') {
                     $commentId = intval($this->getParameter($_GET, 'commentId'));
-                    $postId = intval($this->getParameter($_GET, 'postId'));
                     $this->blogCtrl->reportComment($commentId);
                 }                  
                 else if ($_GET['action'] == 'admin') {

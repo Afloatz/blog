@@ -6,14 +6,16 @@
 
 <p>
     <a class="btn" href="<?= "index.php?action=addPost" ?>">Ajouter un billet</a>
-    <a class="btn" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
+    
+    <!--Afficher bouton en rouge si des commenttaires ont été signalé-->
+    <?php if($_SESSION['sum'] > 0): ?>
+        <a class="btn-moderate" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires!</a>
+    <?php else: ?>
+        <a class="btn" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
+    <?php endif; ?>    
 </p>
 
-<?php if(isset($_SESSION['auth']) AND $_SESSION['auth']): ?>
-    <a class="btn" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
-<?php else: ?>
-    <a class="btn-moderate" href="<?= "index.php?action=adminComments" ?>">Gérer les commentaires</a>
-<?php endif; ?>
+
 
 <table>
     <tr>
@@ -31,3 +33,4 @@
     </tr>
 <?php endforeach; ?>
 </table>
+

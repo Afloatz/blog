@@ -90,6 +90,16 @@ header
     text-decoration: none; /*pour que le mot ne soit pas souligné*/
 }
 
+.btn-moderate {
+    color: rgb(255,255,255); /*couleur blanche de police*/
+    font-size: 1rem;
+    background: rgb(255, 0, 0); /*définition d'un fond rouge*/
+    padding: 0.5%;
+    border-radius: 5px; /*arrondi des angles */
+    text-decoration: none; /*pour que le mot ne soit pas souligné*/
+}
+
+
 
 /*------------------------------------*\
     $PARTIE 2  Autres

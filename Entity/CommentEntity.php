@@ -2,18 +2,12 @@
 
 class CommentEntity
 {
-    private $id, $date, $auteur, $contenu, com_report, $post_id;
+    private $id, $date, $auteur, $contenu, $report, $postid;
 
-    /**
-     * Comment constructor.
-     *
-     * @param $id
-     */
     public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
-
 
     public function hydrate (array $donnees){
         foreach ($donnees as $key => $value)
@@ -31,17 +25,11 @@ class CommentEntity
         }
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
     public function setId($id)
     {
         $id = (int)$id;
@@ -55,33 +43,21 @@ class CommentEntity
 
     }
 
-    /**
-     * @return mixed
-     */
     public function getDate()
     {
         return $this->date;
     }
 
-    /**
-     * @param mixed $date
-     */
     public function setDate($date)
     {
         $this->date = $date;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAuteur()
     {
         return htmlspecialchars($this->auteur);
     }
 
-    /**
-     * @param mixed $auteur
-     */
     public function setAuteur($auteur)
     {
         // On vérifie qu'il s'agit bien d'un chaine de caractères
@@ -91,17 +67,11 @@ class CommentEntity
         }
     }
 
-    /**
-     * @return mixed
-     */
     public function getContenu()
     {
         return htmlspecialchars($this->contenu);
     }
 
-    /**
-     * @param mixed $contenu
-     */
     public function setContenu($contenu)
     {
         if (is_string($contenu))
@@ -110,36 +80,32 @@ class CommentEntity
         }
     }
     
-    public function getComReport()
+    public function getReport()
     {
-        return $this->com_report;
+        return $this->report;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setComReport($com_report)
+    public function setReport($report)
     {
-        $com_report = (int)$com_report;
-        $this->com_report = $com_report;
-    }    
+        $report = (int)$report;
+        $this->report = $report;
+    }  
     
-    public function getBilletId()
+    public function getPostId()
     {
-        return $this->post_id;
+        return $this->postid;
     }
-    
-    public function setBilletId($post_id)
+
+    public function setPostId($postid)
     {
-        $post_id = (int)$post_id;
+        $postid = (int)$postid;
         
         // On vérifie si le nombre est bien strictement positif
-        if ($post_id > 0) {
-            $this->post_id = $post_id;
+        if ($postid > 0) {
+            $this->postid = $postid;
         } else {
             throw new Exception("L'id entrée n'est pas un nombre");
         }
-
     }
 
 }

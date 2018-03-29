@@ -29,7 +29,7 @@ class BlogController {
     
     // Ajoute un commentaire à un billet
     public function addComment($author, $content, $postId) {
-        $comment = new CommentEntity(array('auteur' => $author, 'contenu' => $content, 'post_id' => $postId));
+        $comment = new CommentEntity(array('auteur' => $author, 'contenu' => $content, 'postid' => $postId));
         // Sauvegarde du commentaire
         $this->commentManager->postComment($comment);
         //Comment actualiser la vue?

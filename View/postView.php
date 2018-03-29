@@ -14,7 +14,7 @@
 <?php foreach ($comments as $comment): ?>
     <p><?= $comment->getAuteur() ?> dit :</p>
     <p><?= $comment->getContenu() ?></p>
-    <a class="btn" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() . "&postId=" . $comment->getBilletId() ?>">Signaler</a>
+    <a class="btn" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() ?>">Signaler</a>
 <?php endforeach; ?>
 <hr />
 

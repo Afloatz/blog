@@ -23,6 +23,9 @@ class AdminController {
         if (password_verify($password, $user['password'])) {
             $_SESSION['auth'] = $user;
             $posts = $this->postManager->getPosts();
+            // Vérifie si des commentaires ont été signalé
+            $sum = $this->commentManager->getSum();
+            $_SESSION['sum'] = $sum;
             $view = new View("admin");
             $view->generer(array('posts' => $posts));          
         } else {
