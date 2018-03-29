@@ -34,7 +34,7 @@ class FrontController {
                     session_destroy();
                     $this->blogCtrl->listPosts();
                 }
-                else if ($_GET['action'] == 'addComment') { // Ne fonctionne pas
+                else if ($_GET['action'] == 'addComment') {
                     $author = $this->getParameter($_POST, 'author');
                     $content = $this->getParameter($_POST, 'content');
                     $postId = $this->getParameter($_POST, 'id');

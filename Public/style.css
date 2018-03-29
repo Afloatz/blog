@@ -111,6 +111,9 @@ header
     text-align: center;
 }
 
+table {
+    margin-bottom: 80px;
+}
 
 th, td {
     width: 300px;

@@ -18,7 +18,7 @@ class CommentManager extends Model {
         return $commentsObject;
     }
      
-    // Renvoie la liste des commentaires ASsociés à un billet
+    // Renvoie la liste des commentaires associés à un billet
     public function getComments($postId) {
         $sql = 'SELECT com_id AS id, com_date AS date,'
                 . ' com_author AS auteur, com_content AS contenu FROM comments'
@@ -86,6 +86,15 @@ class CommentManager extends Model {
         $result = $req->fetch(); // renvoie la 1ère ligne 
         $sum = $result[0]; // Stocke le résultat dans une variable (une seule ligne)
         return $sum;
+    }
+    
+    // Renvoie la plus petite valeur de la colonne com_report
+    public function getMin() {
+        $sql = 'SELECT MIN(com_report)' . ' FROM comments';
+        $req = $this->executeRequest($sql);
+        $result = $req->fetch(); // renvoie la 1ère ligne 
+        $min = $result[0]; // Stocke le résultat dans une variable (une seule ligne)
+        return $min;
     }
     
 }

@@ -36,6 +36,14 @@ class AdminController {
     
     // Comment restreindre également l'accès à cette page?
     public function adminComments() {
+        // Vérifie si des commentaires ont été signalé
+        $sum = $this->commentManager->getSum();
+        $_SESSION['sum'] = $sum;  
+        
+        // Vérifie s'il y a des commentaires non signalé
+        $min = $this->commentManager->getMin();
+        $_SESSION['min'] = $min;   
+        
         $comments = $this->commentManager->getListComments();
         $view = new View("adminComments");
         $view->generer(array('comments' => $comments));          
