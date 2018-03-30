@@ -32,13 +32,15 @@ class BlogController {
         $comment = new CommentEntity(array('auteur' => $author, 'contenu' => $content, 'postid' => $postId));
         // Sauvegarde du commentaire
         $this->commentManager->postComment($comment);
-        //Comment actualiser la vue?
+        // Actualisation de l'affichage du billet
+        $this->post($postId);
     }
     
     // Signalement d'un commentaire par un utilisateur
-    public function reportComment($commentId) {
+    public function reportComment($commentId, $postId) {
         $this->commentManager->report($commentId);  
-        //Comment réactualiser la page?
+        // Actualisation de l'affichage du billet
+        $this->post($postId);
     }   
     
 }

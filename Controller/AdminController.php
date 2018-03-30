@@ -53,7 +53,8 @@ class AdminController {
     public function deletePost($postId) {
         $this->postManager->delete($postId); 
         // Actualisation de l'affichage
-        $this->admin(); // Ne fonctionne pas car pas d'argument -> actualiser la vue dans le FrontController ou ici?
+        $this->admin(); // Ne fonctionne pas car pas d'argument
+        // Remettre à chq fois Session[auth] et password?
     }
     
     // Supprime un commentaire

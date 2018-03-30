@@ -42,7 +42,8 @@ class FrontController {
                 }
                 else if ($_GET['action'] == 'reportComment') {
                     $commentId = intval($this->getParameter($_GET, 'commentId'));
-                    $this->blogCtrl->reportComment($commentId);
+                    $postId = intval($this->getParameter($_GET, 'postId'));
+                    $this->blogCtrl->reportComment($commentId, $postId);
                 }                  
                 else if ($_GET['action'] == 'admin') {
                     $username = $this->getParameter($_POST, 'username');
@@ -51,6 +52,7 @@ class FrontController {
                 }
                 
                 // Pour revenir à la page admin qd on est déjà connecté
+                // Récupérer les variables de Session?
                 //else if ($_GET['action'] == 'admin') {
                  //   $this->adminCtrl->admin();
                // }                

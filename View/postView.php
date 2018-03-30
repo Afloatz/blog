@@ -2,19 +2,19 @@
 
 <article>
     <div>
-        <h1 class="titreBillet"><?= $post->getTitre() ?></h1>
+        <h1><?= $post->getTitre() ?></h1>
         <time><?= $post->getDate() ?></time>
     </div>
     <p><?= htmlspecialchars_decode($post->getContenu()) ?></p>
 </article>
 <hr />
 
-<h3 id="titreReponses">Commentaires:</h3>
+<h3>Commentaires:</h3>
 
 <?php foreach ($comments as $comment): ?>
     <p><?= $comment->getAuteur() ?> dit :</p>
     <p><?= $comment->getContenu() ?></p>
-    <a class="btn" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() ?>">Signaler</a>
+    <a class="btn" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() . "&postId=" . $post->getId()  ?>">Signaler</a>
 <?php endforeach; ?>
 <hr />
 
