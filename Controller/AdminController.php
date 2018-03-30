@@ -34,69 +34,104 @@ class AdminController {
         }       
     }
     
-    // Comment restreindre également l'accès à cette page?
     public function adminComments() {
-        // Vérifie si des commentaires ont été signalé
-        $sum = $this->commentManager->getSum();
-        $_SESSION['sum'] = $sum;  
-        
-        // Vérifie s'il y a des commentaires non signalé
-        $min = $this->commentManager->getMin();
-        $_SESSION['min'] = $min;   
-        
-        $comments = $this->commentManager->getListComments();
-        $view = new View("adminComments");
-        $view->generer(array('comments' => $comments));          
+        // On vérifie que la session existe avant de lancer la fonction
+        if (isset($_SESSION['auth'])) {
+            // Vérifie si des commentaires ont été signalé
+            $sum = $this->commentManager->getSum();
+            $_SESSION['sum'] = $sum;  
+
+            // Vérifie s'il y a des commentaires non signalé
+            $min = $this->commentManager->getMin();
+            $_SESSION['min'] = $min;   
+
+            $comments = $this->commentManager->getListComments();
+            $view = new View("adminComments");
+            $view->generer(array('comments' => $comments));
+        } else { // Si la variable de session n'existe pas on redirige vers la page de connexion
+            $view = new View("login");
+            $view->generer(array());          
+        }
     }
     
     // Supprime un billet
     public function deletePost($postId) {
-        $this->postManager->delete($postId); 
-        // Actualisation de l'affichage
-        $this->admin(); // Ne fonctionne pas car pas d'argument
-        // Remettre à chq fois Session[auth] et password?
+        if (isset($_SESSION['auth'])) {
+            $this->postManager->delete($postId);
+        } else {
+            $view = new View("login");
+            $view->generer(array());  
+        }
     }
     
     // Supprime un commentaire
     public function deleteComment($commentId) {
-        $this->commentManager->delete($commentId); 
-        // Actualisation de l'affichage qui ne fonctionne pas
-        $this->admin();
+        if (isset($_SESSION['auth'])) {
+            $this->commentManager->delete($commentId);
+        } else {
+            $view = new View("login");
+            $view->generer(array());  
+        }
     }
     
     // Ajouter un billet
     public function addPost($title, $content) {
-        $post = new PostEntity(array('titre' => $title, 'contenu' => $content));
-        // Sauvegarde du billet
-        $this->postManager->add($post);
+        if (isset($_SESSION['auth'])) {
+            $post = new PostEntity(array('titre' => $title, 'contenu' => $content));
+            // Sauvegarde du billet
+            $this->postManager->add($post);
+        } else {
+            $view = new View("login");
+            $view->generer(array()); 
+        }
     }
     
     // Affiche le billet à modifier
     public function editPost($postId) {
-        $post = $this->postManager->getPost($postId);
-        $view = new View("editPost");
-        $view->generer(array('post' => $post));
+        if (isset($_SESSION['auth'])) {
+            $post = $this->postManager->getPost($postId);
+            $view = new View("editPost");
+            $view->generer(array('post' => $post));
+        } else {
+            $view = new View("login");
+            $view->generer(array());
+        }
     }
     
     // Modifie le billet
     public function updatePost($title, $content, $postId) {
-        $post = new PostEntity(array('id' => $postId, 'titre' => $title, 'contenu' => $content));
-        // Sauvegarde du billet modifié
-        $this->postManager->update($post);
-        //Comment actualiser la vue?
+        if (isset($_SESSION['auth'])) {
+            $post = new PostEntity(array('id' => $postId, 'titre' => $title, 'contenu' => $content));
+            // Sauvegarde du billet modifié
+            $this->postManager->update($post);
+            //Comment actualiser la vue?
+        } else {
+            $view = new View("login");
+            $view->generer(array()); 
+        }
     }
     
     // Affiche le commentaire à modifier
     public function editComment($commentId) {
-        $comment = $this->commentManager->getComment($commentId);
-        $view = new View("editComment");
-        $view->generer(array('comment' => $comment));
+        if (isset($_SESSION['auth'])) {
+            $comment = $this->commentManager->getComment($commentId);
+            $view = new View("editComment");
+            $view->generer(array('comment' => $comment));
+        } else {
+            $view = new View("login");
+            $view->generer(array()); 
+        }
     }
     
     // Modifie le commentaire
     public function updateComment($author, $content, $commentId) {
-        $comment = new CommentEntity(array('id' => $commentId, 'auteur' => $author, 'contenu' => $content));
-        // Sauvegarde du commentaire modifié
-        $this->commentManager->update($comment);
+        if (isset($_SESSION['auth'])) {
+            $comment = new CommentEntity(array('id' => $commentId, 'auteur' => $author, 'contenu' => $content));
+            // Sauvegarde du commentaire modifié
+            $this->commentManager->update($comment);
+        } else {
+            $view = new View("login");
+            $view->generer(array()); 
+        }
     }
 }

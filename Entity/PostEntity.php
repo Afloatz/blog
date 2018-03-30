@@ -96,7 +96,7 @@ class PostEntity
      */
     public function getContenu()
     {
-        return htmlspecialchars($this->contenu);
+        return $this->contenu;
     }
 
     /**

@@ -69,7 +69,7 @@ class CommentEntity
 
     public function getContenu()
     {
-        return htmlspecialchars($this->contenu);
+        return $this->contenu;
     }
 
     public function setContenu($contenu)

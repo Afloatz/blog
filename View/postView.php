@@ -5,7 +5,7 @@
         <h1><?= $post->getTitre() ?></h1>
         <time><?= $post->getDate() ?></time>
     </div>
-    <p><?= htmlspecialchars_decode($post->getContenu()) ?></p>
+    <p><?= $post->getContenu() ?></p>
 </article>
 <hr />
 
