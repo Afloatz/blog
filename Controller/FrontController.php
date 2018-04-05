@@ -45,17 +45,14 @@ class FrontController {
                     $postId = intval($this->getParameter($_GET, 'postId'));
                     $this->blogCtrl->reportComment($commentId, $postId);
                 }                  
-                else if ($_GET['action'] == 'admin') {
+                else if ($_GET['action'] == 'admin' and !isset($_SESSION['auth'])) {
                     $username = $this->getParameter($_POST, 'username');
                     $password = $this->getParameter($_POST, 'password');
                     $this->adminCtrl->admin($username, $password);
                 }
-                
-                // Pour revenir à la page admin qd on est déjà connecté
-                // Récupérer les variables de Session?
-                //else if ($_GET['action'] == 'admin') {
-                 //   $this->adminCtrl->admin();
-               // }                
+                else if ($_GET['action'] == 'admin' and isset($_SESSION['auth'])) {
+                    $this->adminCtrl->adminReturn();
+                }              
                 else if ($_GET['action'] == 'deletePost') {
                     $postId = intval($this->getParameter($_GET, 'id'));
                     $this->adminCtrl->deletePost($postId);
@@ -65,7 +62,6 @@ class FrontController {
                     $this->adminCtrl->deleteComment($commentId);
                 }                
                 else if ($_GET['action'] == 'addPost') {
-                    //Est-ce que je génère la vue ici ou dans AdminController?
                     $view = new View("addPost");
                     $view->generer(array());
                 }

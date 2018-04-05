@@ -17,6 +17,7 @@ class AdminController {
     
     // Affiche la page d'administration si username et password corrects
     public function admin($username, $password) {
+        sleep(1); // Pause de 1 seconde avt de se connecter pour ralentir attaque par force brute
         // Récupération du nom d'utilisateur et mot de passe ds la bdd si utilisateur entré est correct
         $user = $this->adminManager->login($username);
         // On vérifie que le mot de passe entré correspond au mot de passe haché récupéré ds la bdd
@@ -29,9 +30,16 @@ class AdminController {
             $view = new View("admin");
             $view->generer(array('posts' => $posts));          
         } else {
+            // On reste sur la page de connexion si paramètres d'authentification non correct
             $view = new View("login");
             $view->generer(array());
-        }       
+        }  
+    }
+    
+    public function adminReturn() {
+        $posts = $this->postManager->getPosts();
+        $view = new View("admin");
+        $view->generer(array('posts' => $posts));  
     }
     
     public function adminComments() {
@@ -58,6 +66,8 @@ class AdminController {
     public function deletePost($postId) {
         if (isset($_SESSION['auth'])) {
             $this->postManager->delete($postId);
+            // Renvoie à la page d'administration
+            $this->adminReturn();
         } else {
             $view = new View("login");
             $view->generer(array());  
@@ -68,6 +78,8 @@ class AdminController {
     public function deleteComment($commentId) {
         if (isset($_SESSION['auth'])) {
             $this->commentManager->delete($commentId);
+            // Renvoie à la page d'administration des commentaires
+            $this->adminComments();
         } else {
             $view = new View("login");
             $view->generer(array());  
@@ -80,6 +92,8 @@ class AdminController {
             $post = new PostEntity(array('titre' => $title, 'contenu' => $content));
             // Sauvegarde du billet
             $this->postManager->add($post);
+            // Renvoie à la page d'administration
+            $this->adminReturn();
         } else {
             $view = new View("login");
             $view->generer(array()); 
@@ -104,7 +118,8 @@ class AdminController {
             $post = new PostEntity(array('id' => $postId, 'titre' => $title, 'contenu' => $content));
             // Sauvegarde du billet modifié
             $this->postManager->update($post);
-            //Comment actualiser la vue?
+            // Renvoie à la page d'administration
+            $this->adminReturn();
         } else {
             $view = new View("login");
             $view->generer(array()); 
@@ -129,6 +144,8 @@ class AdminController {
             $comment = new CommentEntity(array('id' => $commentId, 'auteur' => $author, 'contenu' => $content));
             // Sauvegarde du commentaire modifié
             $this->commentManager->update($comment);
+            // Renvoie à la page d'administration des commentaires
+            $this->adminComments();
         } else {
             $view = new View("login");
             $view->generer(array()); 
