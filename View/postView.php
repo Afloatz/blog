@@ -16,7 +16,28 @@
     <?php foreach ($comments as $comment): ?>
         <p><?= $comment->getAuteur() ?> dit :</p>
         <p><?= $comment->getContenu() ?></p>
-        <a class="btn btn-danger" href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() . "&postId=" . $post->getId()  ?>">Signaler</a>
+        
+        <button class="btn btn-warning" data-href="<?= "index.php?action=reportComment&commentId=" . $comment->getId() . "&postId=" . $post->getId()  ?>" data-toggle="modal" data-target="#confirm">
+            signaler
+        </button>
+        <!--Ouvre une fenêtre pour confirmer le signalement-->
+        <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Merci de confirmer</h4>               
+                    </div>
+                    <div class="modal-body">
+                        Etes-vous certain de vouloir signaler ce commentaire?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                        <a class="btn btn-danger btn-ok">Oui</a>
+                    </div>
+                </div>
+            </div>
+        </div>           
         <br><br>
     <?php endforeach; ?>
 </section>

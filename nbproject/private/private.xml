@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/blog/View/View.php</file>
-            <file>file:/C:/wamp64/www/blog/View/homeView.php</file>
             <file>file:/C:/wamp64/www/blog/View/template.php</file>
-            <file>file:/C:/wamp64/www/blog/View/loginView.php</file>
             <file>file:/C:/wamp64/www/blog/View/postView.php</file>
-            <file>file:/C:/wamp64/www/blog/assets/css/tuto.css</file>
+            <file>file:/C:/wamp64/www/blog/View/adminCommentsView.php</file>
+            <file>file:/C:/wamp64/www/blog/View/adminView.php</file>
         </group>
     </open-files>
 </project-private>

@@ -39,5 +39,9 @@
             </footer>
             
         </div> 
+        <script src="Public/js/jquery.min.js"></script>
+        <script src="Public/js/bootstrap.min.js"></script>
+        <script src="Public/js/confirm.js"></script>
+
     </body>
 </html>
